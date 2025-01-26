@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./auth.css";
 import { Link, useNavigate } from "react-router-dom";
 import { UserData } from "../../context/UserContext";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,6 +13,10 @@ const Register = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    const emailreg=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailreg.test(email)){
+      toast.error("invalid email");
+    }
     await registerUser(name, email, password, navigate);
   };
   return (
